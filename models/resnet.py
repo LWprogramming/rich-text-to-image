@@ -21,7 +21,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 from diffusers.models.activations import get_activation
-from diffusers.models.attention import AdaGroupNorm
+from diffusers.models.normalization import AdaGroupNorm
 from models.attention_processor import SpatialNorm
 
 
