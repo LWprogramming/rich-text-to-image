@@ -89,6 +89,7 @@ class RegionDiffusionXL(DiffusionPipeline, FromSingleFileMixin):
         load_path: str = "stabilityai/stable-diffusion-xl-base-1.0",
         device: str = "cuda",
         force_zeros_for_empty_prompt: bool = True,
+        manually_set_variant: Optional[str] = None,
     ):
         super().__init__()
 
@@ -102,7 +103,10 @@ class RegionDiffusionXL(DiffusionPipeline, FromSingleFileMixin):
         #     scheduler=scheduler,
         # )
 
-        variant = "fp16" if "stable-diffusion-xl" in load_path else None
+        if manually_set_variant:
+            variant = manually_set_variant
+        else:
+            variant = "fp16" if "stable-diffusion-xl" in load_path else None
 
         # 1. Load the autoencoder model which will be used to decode the latents into image space.
         self.vae = AutoencoderKL.from_pretrained(load_path, subfolder="vae", torch_dtype=torch.float16, use_safetensors=True, variant=variant).to(device)
