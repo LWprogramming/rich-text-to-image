@@ -25,9 +25,11 @@ def main(args, param):
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         model = RegionDiffusion(device)
     elif args.model == 'SDXL':
-        model = RegionDiffusionXL(load_path="stabilityai/stable-diffusion-xl-base-1.0")
+        # model = RegionDiffusionXL(load_path="stabilityai/stable-diffusion-xl-base-1.0")
+        model = RegionDiffusionXL(load_path=args.load_path)
     elif args.model == 'AnimeXL':
-        model = RegionDiffusionXL(load_path="Linaqruf/animagine-xl")
+        # model = RegionDiffusionXL(load_path="Linaqruf/animagine-xl")
+        model = RegionDiffusionXL(load_path=args.load_path)
     else:
         raise NotImplementedError
 
@@ -131,6 +133,7 @@ if __name__ == '__main__':
     parser.add_argument('--segment_threshold', type=float, default=0.3)
     parser.add_argument('--num_segments', type=int, default=9)
     parser.add_argument('--inject_background', type=float, default=0.)
+    parser.add_argument('--load_path', type=str, default="stabilityai/stable-diffusion-xl-base-1.0")
     args = parser.parse_args()
     default_resolution = 512 if args.model == 'SD' else 1024
     param = {
