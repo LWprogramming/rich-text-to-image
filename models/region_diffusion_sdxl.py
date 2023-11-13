@@ -944,7 +944,7 @@ class RegionDiffusionXL(DiffusionPipeline, FromSingleFileMixin):
             image = latents
             return StableDiffusionXLPipelineOutput(images=image)
 
-        image = self.watermark.apply_watermark(image)
+        # image = self.watermark.apply_watermark(image)
         image = self.image_processor.postprocess(image, output_type=output_type)
 
         # Offload last model to CPU
