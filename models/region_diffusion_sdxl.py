@@ -118,7 +118,7 @@ class RegionDiffusionXL(DiffusionPipeline, FromSingleFileMixin):
         self.text_encoder_2 = CLIPTextModelWithProjection.from_pretrained(load_path, subfolder='text_encoder_2', torch_dtype=torch.float16, use_safetensors=True, variant=variant).to(device)
 
         # 3. The UNet model for generating the latents.
-        self.unet = UNet2DConditionModel.from_pretrained(load_path, subfolder="unet", torch_dtype=torch.float16, use_safetensors=True, variant=variant).to(device)
+        self.unet = UNet2DConditionModel.from_pretrained(load_path, subfolder="unet", torch_dtype=torch.float16, use_safetensors=True, variant="fp16").to(device)
     
         # 4. Scheduler.
         self.scheduler = EulerDiscreteScheduler.from_pretrained(load_path, subfolder="scheduler")
