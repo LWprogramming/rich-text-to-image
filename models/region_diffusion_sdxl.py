@@ -857,7 +857,7 @@ class RegionDiffusionXL(DiffusionPipeline, FromSingleFileMixin):
                             # import ipdb;ipdb.set_trace()
                             latents_0 = self.predict_x0(latents, noise_pred, t).to(dtype=latents.dtype)
                             latents_inp = latents_0 / self.vae.config.scaling_factor
-                            imgs = self.vae.decode(latents_inp.to(dtype=torch.float32)).sample
+                            imgs = self.vae.decode(latents_inp.to(dtype=torch.float16)).sample
                             imgs = (imgs / 2 + 0.5).clamp(0, 1)
                             loss_total = 0.
                             for attn_map, rgb_val in zip(text_format_dict['color_obj_atten'], text_format_dict['target_RGB']):
