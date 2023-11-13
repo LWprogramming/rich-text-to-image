@@ -128,7 +128,7 @@ class RegionDiffusionXL(DiffusionPipeline, FromSingleFileMixin):
         self.image_processor = VaeImageProcessor(vae_scale_factor=self.vae_scale_factor)
         self.default_sample_size = self.unet.config.sample_size
 
-        self.watermark = StableDiffusionXLWatermarker()
+        # self.watermark = StableDiffusionXLWatermarker()
 
         self.device_type = device
 
